@@ -26,8 +26,8 @@ print(dataset.shape)
 print(dataset.describe())
 
 array = dataset.values
-X = array[:,1:4]
-Y = array[:,0]
+X = array[:,2:5]
+Y = array[:,1]
 Y = Y.astype('int')
 validation_size = 0.20
 seed = 7
