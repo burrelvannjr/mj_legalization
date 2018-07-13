@@ -1,11 +1,11 @@
-python
+python2
 
 import scipy
 import numpy
 import matplotlib
 import pandas
 import sklearn
-import random, sys
+import random, sys, csv
 from pandas.tools.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 from sklearn import model_selection
@@ -63,19 +63,35 @@ plt.show()
 
 knn = KNeighborsClassifier()
 knn.fit(X_train, Y_train)
-samp = [[1,1,5]]
+samp = [[1,1,5],[1,0,0]]
 predictions = knn.predict(samp)
 predictions
 
 
 
+svm = SVC()
+svm.fit(X_train, Y_train)
+samp = [[1,1,5],[1,0,0]]
+predictions = svm.predict(samp)
+predictions
 
 
 
+sample = numpy.array(samp)
+df = sample.T
+df2 = numpy.array([predictions])
+df3 = numpy.append(df, df2, axis=0)
 
 
+pred = df3.T
+
+csvfile = "df.csv"
 
 
+with open(csvfile, "w") as output:
+    writer = csv.writer(output, lineterminator='\n')
+    writer.writerow(["dem","initiative","mjballots","prediction"])
+    writer.writerows(pred)
 
 
 
