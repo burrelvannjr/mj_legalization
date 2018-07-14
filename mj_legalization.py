@@ -19,7 +19,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
-dataset = pandas.read_csv('st.csv')
+dataset = pandas.read_csv('st_2018.csv')
 
 print(dataset.shape)
 
@@ -45,7 +45,7 @@ models.append(('SVM', SVC()))
 results = []
 names = []
 for name, model in models:
-	kfold = model_selection.KFold(n_splits=10, random_state=seed)
+	kfold = model_selection.KFold(n_splits=3, random_state=seed)
 	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
 	results.append(cv_results)
 	names.append(name)
@@ -54,7 +54,7 @@ for name, model in models:
 
 
 fig = plt.figure()
-fig.suptitle('Algorithm Comparison')
+fig.suptitle('Comparing Algorithms')
 ax = fig.add_subplot(111)
 plt.boxplot(results)
 ax.set_xticklabels(names)
@@ -65,14 +65,6 @@ knn = KNeighborsClassifier()
 knn.fit(X_train, Y_train)
 samp = [[1,1,5],[1,0,0]]
 predictions = knn.predict(samp)
-predictions
-
-
-
-svm = SVC()
-svm.fit(X_train, Y_train)
-samp = [[1,1,5],[1,0,0]]
-predictions = svm.predict(samp)
 predictions
 
 
